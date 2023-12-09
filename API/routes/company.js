@@ -1,5 +1,8 @@
 import express from "express";
-
+import {
+    createNewCompany, 
+    getAllCompanies
+} from "../controllers/companyControllers/companyController.js"
 const companyRouter = express.Router();
 
 
@@ -67,14 +70,16 @@ companyRouter
 companyRouter
     .route("/")
         .get((req, res) => {
-            res.send(
-                "get all companies"
-            );
+            getAllCompanies(
+                req,
+                res
+            ); 
         })
         .post((req, res) => {
-            res.send(
-                "create new comapny"
-            );
+            createNewCompany(
+                req,
+                res
+            );             
         })
 
 

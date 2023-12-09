@@ -2,7 +2,7 @@ import express from "express";
 
 const showListRouter = express.Router();
 
-//get all users
+//get all show lists
 showListRouter.get("/", (req,res) => {
     res.send("list of all users placeholder");
 })
