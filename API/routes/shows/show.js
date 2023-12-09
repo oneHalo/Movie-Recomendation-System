@@ -1,4 +1,7 @@
 import express from "express";
+import {
+    getAllShows
+} from "../../controllers/showControllers/showController.js"
 
 const showRouter = express.Router();
 
@@ -36,8 +39,9 @@ showRouter
 showRouter
     .route("/")
         .get((req, res) => {
-            res.send(
-                "get all shows"
+            getAllShows(
+                req,
+                res
             );
         })
         .post((req,res) => {

@@ -46,13 +46,13 @@ app.use("/productionCompany", companyRouter);
 app.use("/showList", showListRouter);
 
 //show router
-app.use("/show", showRouter);
+app.use("/shows", showRouter);
 
 //tvShowRouter
-app.use("/show/tvShow", tvShowRouter);
+app.use("/shows/tvShow", tvShowRouter);
 
 //movie Router
-app.use("/show/movie", movieRouter)
+app.use("/shows/movie", movieRouter)
 
 //review router
 app.use("/review", reviewRouter);

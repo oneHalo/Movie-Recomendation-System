@@ -1,4 +1,13 @@
 import express from "express";
+import {
+    getAllAdmins,
+    createNewAdmin
+} from "../controllers/adminControllers/adminController.js"
+import {
+    getAdminByID,
+    updateAdminByID,
+    deleteAdminByID
+} from "../controllers/adminControllers/adminIDController.js";
 
 const adminRouter = express.Router();
 
@@ -6,29 +15,41 @@ const adminRouter = express.Router();
 adminRouter
     .route("/:adminID")
         .get((req,res) => {
-            res.send(
-                `get admin with id ${req.params.adminID} `
-            );
+            getAdminByID(
+                req,
+                res,
+                req.params.adminID
+            );             
         })
         .put((req,res) => {
-            res.send(`update admin with id ${req.params.adminID} `)
+            updateAdminByID(
+                req,
+                res,
+                req.params.adminID
+            ); 
         })
         .delete((req,res) => {
-            res.send(`delete admin with id ${req.params.adminID} `)
+            deleteAdminByID(
+                req,
+                res,
+                req.params.adminID
+            );
         })
 
 //get all admins / create admin
 adminRouter
     .route("/")
         .get((req, res) => {
-            res.send(
-                "get all admin"
+            getAllAdmins(
+                req,
+                res
             );
         })
         .post((req, res) => {
-            res.send(
-                "createNewAdmin"
-            )
+            createNewAdmin(
+                req,
+                res
+            ); 
         })
 
 
