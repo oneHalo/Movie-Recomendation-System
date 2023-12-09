@@ -30,6 +30,9 @@ console.log(`Running on port number ${port}`)
 //     }
 // })
 
+
+app.use(express.json());
+
 //user router
 app.use("/users", userRouter);
 

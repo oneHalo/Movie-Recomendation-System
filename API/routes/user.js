@@ -1,4 +1,13 @@
 import express from "express";
+import { 
+    getAllUsers,
+    createNewUser 
+} from "../controllers/userController/userController.js";
+import{
+    getUserByID, 
+    updateUserByID,
+    deleteUserByID
+} from "../controllers/userController/userIDController.js"
 
 const userRouter = express.Router();
 
@@ -6,30 +15,43 @@ const userRouter = express.Router();
 userRouter
     .route("/:userID")
         .get((req,res) => {
-            res.send(
-                `get user with id ${req.params.userID} `
+            getUserByID(
+                req,
+                res,
+                req.params.userID
             );
         })
         //not sure if these belong here or with / according to best practices
         .put((req,res) => {
-            res.send(`update user with id ${req.params.userID} `)
+            updateUserByID(
+                req,
+                res, 
+                req.params.userID
+            );
         })
         .delete((req,res) => {
-            res.send(`delete user with id ${req.params.userID} `)
+            deleteUserByID(
+                req,
+                res,
+                req.params.userID
+            );
         })
 
 //get all users / create new user
+//CREATE USER requires :
+/*
+firstName
+lastName
+email
+password
+*/
 userRouter
     .route("/")
         .get((req, res) => {
-            res.send(
-                "get all users"
-            );
+            getAllUsers(req, res);
         })
         .post((req, res) => {
-            res.send(
-                "createNewUser"
-            )
+            createNewUser(req, res);
         })
 
 
