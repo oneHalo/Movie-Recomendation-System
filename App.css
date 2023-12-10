@@ -1,0 +1,61 @@
+#root{
+  height: 100vh;
+  background-image: url(moviebackground.jpg);
+  background-repeat:no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+/* .LoginPage{
+  background-image: url(moviebackground.jpg);
+  background-repeat:no-repeat;
+  background-size: cover;
+  height: 100vh;
+} */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  background-color: #333;
+  color: aquamarine;
+  text-align: center;
+  padding: 1em;
+}
+/* main {
+  padding: 1em;
+} */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1em;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.login{
+  
+  display: grid;
+  box-sizing: border-box;
+  padding-left: 40%;
+  padding-right: 40%;
+  padding-top: 15%;
+}
+.loginButton{
+  margin-top: 5%;
+  background-color: aquamarine;
+  border-radius: 10px;
+}
+.passwordInput{
+  margin-top: 4%;
+}
+.signupButton{
+  margin-top: 4%;
+  border-radius: 10px;;
+  background-color: whitesmoke;
+}
