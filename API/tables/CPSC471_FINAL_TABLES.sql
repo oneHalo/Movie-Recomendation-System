@@ -1,6 +1,6 @@
 -- client user table declaration
 CREATE TABLE UserClient(
-    UserID      int NOT NULL,
+    UserID      int NOT NULL AUTO_INCREMENT,
     email       VARCHAR(30) NOT NULL,
     password    VARCHAR(30) NOT NULL,
     firstName   VARCHAR(30) NULL,
@@ -11,7 +11,7 @@ CREATE TABLE UserClient(
 
 -- admin user table declaration
 CREATE TABLE Admin(
-    AdminID     INT NOT NULL,
+    AdminID     INT NOT NULL AUTO_INCREMENT,
     email       VARCHAR(30) NOT NULL,
     password    VARCHAR(30) NOT NULL,
     firstName   VARCHAR(30) NULL,
@@ -45,7 +45,7 @@ CREATE TABLE ProductionCompany(
 
 -- show table declaration
 CREATE TABLE Shows(
-    ShowID  INT NOT NULL,
+    ShowID  INT NOT NULL AUTO_INCREMENT,
     Title   VARCHAR(30) NOT NULL,
     ReleaseDate     DATE NULL,
     AverageRating   FLOAT NULL,
