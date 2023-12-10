@@ -1,7 +1,8 @@
 import express from "express";
 import { 
     getAllUsers,
-    createNewUser 
+    createNewUser,
+    checkCredentials
 } from "../controllers/userController/userController.js";
 import{
     getUserByID, 
@@ -10,6 +11,12 @@ import{
 } from "../controllers/userController/userIDController.js"
 
 const userRouter = express.Router();
+
+userRouter
+    .route("/login")
+        .post((req, res) => {
+            checkCredentials(req, res);
+        });
 
 //get, update and delete for /user/id
 userRouter

@@ -1,5 +1,10 @@
 import { db } from "../../conector/db.js"
-
+import {
+    createPlanToWatchList,
+    createWatchedList,
+    createWatchingList
+} from "../showListControllers/showListController.js"
+import jwt from "jsonwebtoken";
 
 //GET
 const 
@@ -20,6 +25,7 @@ const
 const 
     createNewUser = (req, res) => {
         //check req for required fields
+        
         if(
             req.body
             &&
@@ -49,10 +55,11 @@ const
                         res.send(err);
                     }
                     else{
-                        res.status(200);
+                        //now need to create lists for watched, watching, plantowatch
                     }
                 }
             );
+
         }
         else {
             res.status(400).send("invalid arguments for createNewUser");
@@ -60,7 +67,42 @@ const
         console.log(req.body);
     };
 
+const
+    checkCredentials = (req, res) => {
+        if(
+            req.body.email
+            &&
+            req.body.password
+        ){
+            const q = 
+                `SELECT * FROM UserClient WHERE email = ? AND password = ?;`
+
+            db.query(
+                q,
+                [
+                    req.body.email,
+                    req.body.password
+                ],
+                (err, data) => {
+                    if(err){
+                        console.log(err);
+                        res.status(400).send("error logging in user");
+                    }
+                    else {
+                        if(data.length === 0){
+                            res.status(400).json({success: false, UserID: -1})
+                        }
+                        else{
+                            res.status(200).json({success: true, UserID: data[0].UserID})
+                        }
+                    }
+                }
+            )
+        }       
+    }
+
 export {
     getAllUsers,
-    createNewUser
+    createNewUser,
+    checkCredentials
 };
