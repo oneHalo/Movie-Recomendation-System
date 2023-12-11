@@ -16,10 +16,8 @@ import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+
 import { topBar } from '../../components/topBar/topBar';
-
-
-import { useLocation } from 'react-router';
 
 // const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const cards = [1,2,3];
@@ -27,16 +25,13 @@ const cards = [1,2,3];
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export function SearchResults() {
-
-    const location = useLocation();
-    console.log(location.state);
+export function MovieInfo() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
-          <Button variant="outined" href="#searchPage">Search For Movies!</Button>
+          <Button variant="outined" href="#homePage">Back to Home Page</Button>
         </Toolbar>
       </AppBar>
       <main>
@@ -48,29 +43,108 @@ export function SearchResults() {
             pb: 6,
           }}
         >
-          <Container maxWidth="md">
+          <Container maxWidth="xl">
             <Typography
               component="h1"
               variant="h2"
-              align="center"
+              align="left"
               color="text.primary"
               gutterBottom
             >
-              Search Results
+              Movie Name
+            </Typography>
+            <Stack 
+                direction={{ xs: 'column', sm: 'row' }}
+                spacing={{ xs: 1, sm: 3, md: 4, lg: 4, xl: 4}}
+                sx={{justifyContent:'left'}}
+            >
+                <Button variant="contained" href="">
+                    Add to Plan To Watch
+                </Button>
+                <Button variant="contained" href="" >
+                    Add to Watching
+                </Button>
+                <Button variant="contained" href={""} >
+                    Add to Watched
+                </Button>
+                 <Button variant="contained" href={"#/review"} >
+                    Write a Review
+                </Button>
+            </Stack>
+          </Container>
+        </Box>
+        <Box>
+          <Container maxWidth="xl">
+            <Typography
+              component="h1"
+              variant="h4"
+              align="left"
+              color="text.secondary"
+            >
+              Description
             </Typography>
             <Typography
               component="h1"
-              variant="h6"
-              align="center"
-              color="text.primary"
-              gutterBottom
+              variant="body1"
+              align="left"
+              color="text.secondary"
             >
-              {location.state ? location.state.movieQueryText : ""}
+              Some text describing a bad movie
             </Typography>
-          <Button variant="contained" href="#homePage" >Back to Home Page</Button>
           </Container>
         </Box>
-
+        <Box>
+          <Container maxWidth="xl">
+            <Typography
+              component="h1"
+              variant="h4"
+              align="left"
+              color="text.secondary"
+            >
+              Actors
+            </Typography>
+            <Typography
+              component="h1"
+              variant="body1"
+              align="left"
+              color="text.secondary"
+            >
+              Actors Names
+            </Typography>
+          </Container>
+        </Box>
+        <Box>
+          <Container maxWidth="xl">
+            <Typography
+              component="h1"
+              variant="h4"
+              align="left"
+              color="text.secondary"
+            >
+              Directors
+            </Typography>
+            <Typography
+              component="h1"
+              variant="body1"
+              align="left"
+              color="text.secondary"
+            >
+              Actors Names
+            </Typography>
+          </Container>
+        </Box>
+        <Box>
+          <Container maxWidth="xl">
+            <Typography
+              component="h1"
+              variant="h4"
+              align="center"
+              color="text.secondary"
+            >
+              Reviews
+            </Typography>
+          </Container>
+        </Box>
         <Container sx={{ py: 8 }} maxWidth="xl">
           {/* End hero unit */}
           <Grid container spacing={4}>

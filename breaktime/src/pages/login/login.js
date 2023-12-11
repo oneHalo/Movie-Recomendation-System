@@ -13,7 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const defaultTheme = createTheme();
 
-export function SignIn() {
+export function SignIn(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -22,6 +22,10 @@ export function SignIn() {
       password: data.get('password'),
     });
   };
+
+//   localStorage.setItem("userID", JSON.stringify({value: 3, expry: (new Date()).getTime() + 30000}));
+
+//   console.log(localStorage.getItem("userID"));
 
   return (
     <ThemeProvider theme={defaultTheme}>

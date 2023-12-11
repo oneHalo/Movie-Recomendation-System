@@ -5,6 +5,7 @@ import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useNavigate } from 'react-router';
@@ -13,7 +14,7 @@ const defaultTheme = createTheme();
 
 
 const
-    SearchPage = () => {
+    ReviewPage = () => {
 
         const navigate = useNavigate();
         const handleSubmit = (event) => {
@@ -21,9 +22,9 @@ const
             event.preventDefault();
             const data = new FormData(event.currentTarget);
             console.log({
-            search: data.get('search'),
+            email: data.get('email'),
             });
-            navigate("/searchResults", {state: {movieQueryText : data.get("search")}});
+            navigate("/searchResults", {state: {movieQueryText : data.get("email")}});
         };
 
         return(
@@ -48,15 +49,26 @@ const
                             resume, please feel free to aswell!
                         </Typography>
                         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                                    <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="search"
-                                    label="Movie Title"
-                                    name="search"
-                                    autoFocus
-                                    />
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="Title"
+                                label="Movie Title"
+                                name="Title"
+                                autoFocus
+                            />
+                            <TextField
+                                id="number"
+                                label="Rating"
+                                type="number"
+                                fullWidth
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                            <TextareaAutosize id="comments" minRows={3} placeholder="Write your review here" />
+
                         </Box>
                         <Stack 
                             direction={{ xs: 'column', sm: 'row' }}
@@ -76,5 +88,5 @@ const
     }
 
 export{
-    SearchPage
+    ReviewPage
 };

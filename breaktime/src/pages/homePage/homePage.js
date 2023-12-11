@@ -24,7 +24,12 @@ const cards = [1,2,3];
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export function HomePage() {
+export function HomePage(props) {
+
+//   const temp = localStorage.getItem("userID");
+
+//   console.log(temp);
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
