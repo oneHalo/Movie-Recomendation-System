@@ -10,6 +10,7 @@ import { actorRouter } from "./routes/actor.js";
 import { companyRouter } from "./routes/company.js";
 import { tvShowRouter } from "./routes/shows/tvShow.js";
 import { movieRouter } from "./routes/shows/movie.js";
+import { searchRouter } from "./routes/search.js";
 import { db } from "./conector/db.js";
 
 //boiler plate code
@@ -62,6 +63,9 @@ app.use("/director", directorRouter);
 
 //actor router
 app.use("/actor", actorRouter);
+
+//search
+app.use("/search", searchRouter);
 
 
 

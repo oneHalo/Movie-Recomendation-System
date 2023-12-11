@@ -2,6 +2,9 @@ import express from "express";
 import {
     getAllShows
 } from "../../controllers/showControllers/showController.js"
+import{
+    getShowByID
+} from "../../controllers/showControllers/showIDController.js"
 
 const showRouter = express.Router();
 
@@ -19,9 +22,11 @@ showRouter
 showRouter
     .route("/:showID")
         .get((req, res) => {
-            res.send(
-                `get show with id ${req.params.showID}`
-            )
+            getShowByID(
+                req,
+                res,
+                req.params.showID
+            ) 
         })
         .delete((req, res) => {
             res.send(

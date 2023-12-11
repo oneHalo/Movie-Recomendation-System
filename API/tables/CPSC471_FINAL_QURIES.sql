@@ -40,30 +40,30 @@ WHERE AdminID = someUsersID;
 -- ------------------------------------
 -- we are going to need some queries to add, delete and get shows
 -- insert
-INSERT INTO Show (ShowID, Title, ReleaseDate, AverageRating, Description, CompanyName)
-VALUES (newShowID, newTitle, newShowDate, 0, newShowDesc, prodCompany);
+INSERT INTO Shows (Title, ReleaseDate, AverageRating, Descript, CompanyName)
+VALUES (newTitle, newShowDate, 0, newShowDesc, prodCompany);
 -- get all shows
-SELECT * FROM Show;
+SELECT * FROM Shows;
 --get a specific show
-SELECT * FROM Show WHERE ShowID = someShowID;
+SELECT * FROM Shows WHERE ShowID = someShowID;
 -- get all shows from a company
-SELECT * FROM Show WHERE CompanyName = someCompanyName;
+SELECT * FROM Shows WHERE CompanyName = someCompanyName;
 -- get all tvShows from a company
-SELECT * FROM Show as S, TvShow as T
+SELECT * FROM Shows as S, TvShow as T
 WHERE S.ShowID = T.ShowID
 AND S.CompanyName = someCompanyName;
 -- get all movies from a company
-SELECT * FROM Show as S, Movie as M
+SELECT * FROM Shows as S, Movie as M
 WHERE S.ShowID = M.ShowID
 AND S.CompanyName = someCompanyName;
 -- delete show
-DELETE FROM Show WHERE ShowID = showIDtoDelete;
+DELETE FROM Shows WHERE ShowID = showIDtoDelete;
 -- update a shows info
-UPDATE Show 
+UPDATE Shows 
 SET Title = newTitle, ReleaseDate = newDate, Description = newDesc, CompanyName = newComp
 WHERE ShowID = someSHowID;
 -- update a shows AverageRating
-UPDATE Show 
+UPDATE Shows
 SET AverageRating = newAverageRating
 WHERE ShowID = someSHowID;
 
