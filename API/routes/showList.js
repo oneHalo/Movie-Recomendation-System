@@ -77,11 +77,12 @@ showListRouter
 //listHas
 showListRouter
     .route("/listHas/:userID")
-        .get((req, res) => {
+        .put((req, res) => {
             if(req.body.type === null){
                 res.status(400).send("need to include list type");
             } else {
                 // return all show id's that are in the list
+                console.log("help");
                 getShowsFromListByID(
                     req,
                     res,

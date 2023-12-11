@@ -19,18 +19,15 @@ const port = process.env.PORT;
 const app = express();
 console.log(`Running on port number ${port}`)
 
-//testing out db connection SUCCESS!
-// const q = "SELECT * FROM UserClient";
+// allow cross acess
+app.use(function (req, res, next) {
 
-// db.query(q, (err, data) => {
-//     if(err){
-//         console.log("error connecting to db");
-//     }
-//     else {
-//         console.log(data);
-//     }
-// })
-
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 
 app.use(express.json());
 

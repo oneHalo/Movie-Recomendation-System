@@ -9,6 +9,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import axios from "axios";
+
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -21,7 +23,27 @@ export function SignUp() {
     console.log({
       email: data.get('email'),
       password: data.get('password'),
+      firstName: data.get('firstName'),
+      lastName : data.get('lastName')
     });
+    //check user credentials
+    axios.post(
+      "http://localhost:8000/users/", {
+        email : data.get("email"),
+        password : data.get("password"),
+        firstName : data.get("firstName"),
+        lastName: data.get("lastName")
+      }
+    ).then(
+      (response) => {
+        //if credentials are good move to next page
+        console.log(response.data);
+        alert("You have successfully made an account!");
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   };
 
   return (

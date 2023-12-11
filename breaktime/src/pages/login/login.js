@@ -9,11 +9,16 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import axios from "axios";
+
+import { useNavigate } from 'react-router';
+
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
 export function SignIn(props) {
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -21,11 +26,24 @@ export function SignIn(props) {
       email: data.get('email'),
       password: data.get('password'),
     });
+    //check user credentials
+    axios.post(
+      "http://localhost:8000/users/login", {
+        email : data.get("email"),
+        password : data.get("password")
+      }
+    ).then(
+      (response) => {
+        //if credentials are good move to next page
+        console.log(response.data);
+
+        navigate("/homePage", {state: { userID: response.data.UserID }});
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   };
-
-//   localStorage.setItem("userID", JSON.stringify({value: 3, expry: (new Date()).getTime() + 30000}));
-
-//   console.log(localStorage.getItem("userID"));
 
   return (
     <ThemeProvider theme={defaultTheme}>

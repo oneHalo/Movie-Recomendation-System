@@ -16,6 +16,7 @@ const userRouter = express.Router();
 userRouter
     .route("/login")
         .post((req, res) => {
+            console.log(req.body);
             checkCredentials(req, res);
         });
 
@@ -57,6 +58,7 @@ password
 userRouter
     .route("/")
         .get((req, res) => {
+            console.log("test");
             getAllUsers(req, res);
         })
         .post((req, res) => {
