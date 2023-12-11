@@ -1,9 +1,5 @@
 import { db } from "../../conector/db.js"
-import {
-    createPlanToWatchList,
-    createWatchedList,
-    createWatchingList
-} from "../showListControllers/showListController.js"
+
 import jwt from "jsonwebtoken";
 
 //GET
@@ -54,9 +50,7 @@ const
                     if(err){
                         res.send(err);
                     }
-                    else{
-                        //now need to create lists for watched, watching, plantowatch
-                    }
+
                 }
             );
 

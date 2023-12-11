@@ -10,6 +10,7 @@ import{
     deleteUserByID
 } from "../controllers/userController/userIDController.js"
 
+
 const userRouter = express.Router();
 
 userRouter
@@ -27,6 +28,7 @@ userRouter
                 res,
                 req.params.userID
             );
+            res.status(400);
         })
         //not sure if these belong here or with / according to best practices
         .put((req,res) => {

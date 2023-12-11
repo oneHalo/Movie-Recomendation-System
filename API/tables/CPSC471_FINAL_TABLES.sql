@@ -108,7 +108,7 @@ CREATE TABLE Movie(
 
 -- Actor table declaration
 CREATE TABLE Actor(
-    ActorID         INT NOT NULL,
+    ActorID         INT NOT NULL AUTO_INCREMENT,
     -- may not know age of actor so allow null
     -- need to know name
     Age             INT NULL,
@@ -119,7 +119,7 @@ CREATE TABLE Actor(
 
 -- director table declaration
 CREATE TABLE Director(
-    DirectorID      INT NOT NULL,
+    DirectorID      INT NOT NULL AUTO_INCREMENT,
     -- may not know age so allow null
     -- need to know name
     Age             INT NULL,

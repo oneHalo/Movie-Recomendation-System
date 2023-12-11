@@ -5,7 +5,7 @@ const
     createWatchedList = (req, res, userID) => {
         const q 
             = `INSERT INTO ShowList (UserID, ListName, ListSize)
-            VALUES (?, "watched", 0);`
+            VALUES (?, "watched", 1);`
 
         db.query(
             q,
@@ -15,6 +15,7 @@ const
             (err, data) =>{
                 if(err){
                     res.status(400).send("error making watchedList");
+                    console.log(err);
                 }
                 else {
                     const 
@@ -29,7 +30,10 @@ const
                         ],
                         (err, data) => {
                             if(err){
-                                res.status(400).send("error adding list to watched");
+                                res.status(400).json({success: false});
+                            }
+                            else{
+                                res.status(200).json({success: true})
                             }
                         }
                     )
@@ -43,7 +47,7 @@ const
     createWatchingList = (req, res, userID) => {
         const q 
             = `INSERT INTO ShowList (UserID, ListName, ListSize)
-            VALUES (?, "watching", 0);`
+            VALUES (?, "watching", 1);`
 
         db.query(
             q,
@@ -57,7 +61,7 @@ const
                 else {
                     const 
                         insertIntoWatched =
-                            `INSERT INTO Watched (UserID, ListName)
+                            `INSERT INTO Watching (UserID, ListName)
                             VALUES (?, "watching");`
                     
                     db.query(
@@ -67,7 +71,10 @@ const
                         ],
                         (err, data) => {
                             if(err){
-                                res.status(400).send("error adding list to watching");
+                                res.status(400).json({success: false});
+                            }
+                            else {
+                                res.status(200).json({success: true});
                             }
                         }
                     )
@@ -81,7 +88,7 @@ const
     createPlanToWatchList = (req, res, userID) => {
         const q 
             = `INSERT INTO ShowList (UserID, ListName, ListSize)
-            VALUES (?, "planToWatch", 0);`
+            VALUES (?, "planToWatch", 1);`
 
         db.query(
             q,
@@ -105,7 +112,10 @@ const
                         ],
                         (err, data) => {
                             if(err){
-                                res.status(400).send("error adding list to watched");
+                                res.status(400).json({success: false});
+                            }
+                            else{
+                                res.status(200).json({success: true});
                             }
                         }
                     )

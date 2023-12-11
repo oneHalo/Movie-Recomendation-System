@@ -1,38 +1,44 @@
 import express from "express";
 
+import {
+    getDirectorById
+} from "../controllers/directorControllers/directorController.js";
+
+import {
+    getDirectorsOfShowByID
+} from "../controllers/directorControllers/directsController.js";
+
 const directorRouter = express.Router();
 
 
 directorRouter
-    .route("/:directorID")
+    .route("/directsShow/:directorID")
         .get((req, res) => {
-            res.send(
-                `get director with id ${req.params.directorID}`
-            )
-        })
-        .delete((req, res) => {
-            res.send(
-                `delete director with id ${req.params.directorID}`
-            )
-        })
-        .put((req, res) => {
-            res.send(
-                `update director with id ${req.params.directorID}`
-            )
+            getDirectorsOfShowByID(
+                req,
+                res,
+                req.params.directorID
+            );
         })
 
 directorRouter
-    .route("/")
+    .route("/:directorID")
         .get((req, res) => {
-            res.send(
-                "get all directors"
-            )
+            getDirectorById(
+                req,
+                res,
+                req.params.directorID
+            ) ;
         })
-        .post((req, res) => {
-            res.send(
-                "create new directors"
-            )
-        })
+        
+
+// directorRouter
+//     .route("/")
+//         .post((req, res) => {
+//             res.send(
+//                 "create new directors"
+//             )
+//         })
 
 
 
