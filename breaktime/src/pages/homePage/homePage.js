@@ -1,3 +1,10 @@
+/*
+James Platt homePage.js
+This page makes heavy use of components from Material UI and uses the album template as a souce, which can
+be found here
+https://github.com/mui/material-ui/tree/v5.14.20/docs/data/material/getting-started/templates/album
+*/
+
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
@@ -15,8 +22,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-import { topBar } from '../../components/topBar/topBar';
 import { useLocation, Navigate } from 'react-router';
 
 import axios from "axios";

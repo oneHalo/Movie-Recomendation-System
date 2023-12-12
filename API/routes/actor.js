@@ -32,13 +32,7 @@ actorRouter
         })
 
 
-// actorRouter
-//     .route("/")
-//         .post((req, res) => {
-//             res.send(
-//                 "create new actor"
-//             )
-//         })
+
 
 
 

@@ -1,3 +1,9 @@
+/*
+James Platt movieInfo.js
+This page makes heavy use of Material ui components
+https://mui.com/
+*/
+
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
@@ -15,9 +21,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-
-import { topBar } from '../../components/topBar/topBar';
 
 // const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const cards = [1,2,3];

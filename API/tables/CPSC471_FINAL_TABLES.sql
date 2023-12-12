@@ -21,18 +21,6 @@ CREATE TABLE Admin(
     UNIQUE(email)
 );
 
--- production company table declaration
--- CREATE TABLE ProductionCompany(
---     Name            VARCHAR(50) NOT NULL,
---     CreationDate    DATE    NULL,
---     numMovies       INT     NULL,
---     numTvShows      INT     NULL,
---     CONSTRAINT pk_ProductionCompany PRIMARY KEY(Name),
---     -- checking if creation date is before the current date
---     -- check(CreationDate <= (
---     --     SELECT GETDATE()
---     -- ))
--- );
 
 -- actual one that went into db
 CREATE TABLE ProductionCompany(
