@@ -12,5 +12,5 @@ you should be able get all the tables for the project.
 - to run the api, first run 'npm install' and then run 'npm run devStart' to start the api on port 8000
 
 Mostly everything for the app is implemented, but again I got pulled in two directions at the last second as I had
-to write the front end too for a sick group member.
+to write the front end at the last minute
 -James Platt
