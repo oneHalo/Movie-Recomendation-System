@@ -113,7 +113,7 @@ const
                             sx={{justifyContent:'center'}}
                         >
                           
-                            <Button variant="contained" href={"#homePage"} >
+                            <Button variant="contained" href={`#homePage/${userID}`} >
                                 Go back to home page
                             </Button>
                         </Stack>

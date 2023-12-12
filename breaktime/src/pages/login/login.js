@@ -43,7 +43,7 @@ export function SignIn(props) {
         //if credentials are good move to next page
         console.log(response.data);
 
-        navigate("/homePage", {state: { userID: response.data.UserID }});
+        navigate(`/homePage/${response.data.UserID}`, {state: { userID: response.data.UserID }});
       },
       (error) => {
         console.log(error);

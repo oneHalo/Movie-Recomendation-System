@@ -22,7 +22,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useLocation, Navigate } from 'react-router';
+import { useLocation, Navigate, useParams } from 'react-router';
 
 import axios from "axios";
 
@@ -35,13 +35,11 @@ const defaultTheme = createTheme();
 export function HomePage(props) {
 
   const location = useLocation();
+  const { userID } = useParams()
 
   const [watched, setWatched] = React.useState(null);
   const [watching, setWatching] = React.useState(null);
   const [planToWatch, setPlanToWatch] = React.useState(null);
-
-  const userID = location.state ? location.state.userID : null;
-  console.log(userID);
   //get watched
 
   React.useEffect(() => {

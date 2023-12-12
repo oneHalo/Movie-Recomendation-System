@@ -180,7 +180,7 @@ export function MovieInfo() {
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
-          <Button variant="outined" href="#homePage">Back to Home Page</Button>
+          <Button variant="outined" href= {`#homePage/${userID}`}>Back to Home Page</Button>
         </Toolbar>
       </AppBar>
       <main>
