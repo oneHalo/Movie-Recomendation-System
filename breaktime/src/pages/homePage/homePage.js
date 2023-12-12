@@ -35,7 +35,7 @@ export function HomePage(props) {
   const [watching, setWatching] = React.useState(null);
   const [planToWatch, setPlanToWatch] = React.useState(null);
 
-  const userID = location.state ? location.state.userID : -1;
+  const userID = location.state ? location.state.userID : null;
   console.log(userID);
   //get watched
 
