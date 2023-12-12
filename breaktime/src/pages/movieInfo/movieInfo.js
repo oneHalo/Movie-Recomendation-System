@@ -22,6 +22,12 @@ import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import axios from 'axios';
+
+import { useState } from 'react';
+
+import { useParams } from 'react-router';
+
 // const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const cards = [1,2,3];
 
@@ -29,6 +35,146 @@ const cards = [1,2,3];
 const defaultTheme = createTheme();
 
 export function MovieInfo() {
+
+  const { showID, userID } = useParams();
+
+  const [show, setShow ] = useState(null);
+  const [actors, setActors] = useState(null);
+  const [directors, setDirectors] = useState(null);
+  const [reviews, setReviews] = useState(null);
+
+  const addToList = (listType) => {
+    //first make sure they have a list
+    axios.post(
+      `http://localhost:8000/showList/listHas/${userID}`,
+      {
+        type : listType,
+        showID : showID
+      }
+    )
+    .then(
+      (response) => {
+        console.log(`added to ${listType}`)
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+
+    // let hasList = false;
+    // axios.get(
+    //   `http://localhost:8000/showList/${listType}/${userID}`
+    // )
+    // .then(
+    //   (response) => {
+    //       console.log(response.data.length);
+    //       if(response.data.size > 0){
+    //         hasList = true;
+    //         if(hasList){
+    //           axios.post(
+    //             `http://localhost:8000/showList/listHas/${userID}`,
+    //             {
+    //               type : listType,
+    //               showID : showID
+    //             }
+    //           )
+    //           .then(
+    //             (response) => {
+    //               console.log(`added to ${listType}`)
+    //             },
+    //             (error) => {
+    //               console.log(error);
+    //             }
+    //           )
+    //         }
+    //       }
+    //       else {
+    //         axios.post(
+    //           `http://localhost:8000/showList/${listType}/${userID}`
+    //         )
+    //         .then(
+    //           (response) => {
+    //             hasList = true;
+    //             if(hasList){
+                  
+    //             }
+    //           },
+    //           (error) => {
+    //             console.log(error);
+    //           }
+    //         )
+    //       }
+          
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // )
+
+    // console.log(hasList);
+    
+    
+    
+  }
+
+  React.useEffect(() => {
+    axios.get(
+      `http://localhost:8000/shows/${showID}`
+    )
+    .then(
+      (response) => {
+        setShow(response.data[0]);
+      },
+      (error) => {
+        console.log("ERROR GETTING WATCHED SHOWS");
+      }
+    )
+  }, []);
+  
+  React.useEffect(() => {
+    axios.get(
+      `http://localhost:8000/actor/actsInShow/${showID}`
+    )
+    .then(
+      (response) => {
+        setActors(response.data);
+      },
+      (error) => {
+        console.log("ERROR GETTING WATCHED SHOWS");
+      }
+    )
+  }, []); 
+
+  React.useEffect(() => {
+    axios.get(
+      `http://localhost:8000/director/directsShow/${showID}`
+    )
+    .then(
+      (response) => {
+        setDirectors(response.data);
+      },
+      (error) => {
+        console.log("ERROR GETTING WATCHED SHOWS");
+      }
+    )
+  }, []); 
+
+  React.useEffect(() => {
+    axios.get(
+      `http://localhost:8000/review/${showID}`
+    )
+    .then(
+      (response) => {
+        setReviews(response.data);
+      },
+      (error) => {
+        console.log("ERROR GETTING WATCHED SHOWS");
+      }
+    )
+  }, []); 
+
+  console.log(reviews);
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
@@ -54,23 +200,23 @@ export function MovieInfo() {
               color="text.primary"
               gutterBottom
             >
-              Movie Name
+              {show ? show.Title : ""}
             </Typography>
             <Stack 
                 direction={{ xs: 'column', sm: 'row' }}
                 spacing={{ xs: 1, sm: 3, md: 4, lg: 4, xl: 4}}
                 sx={{justifyContent:'left'}}
             >
-                <Button variant="contained" href="">
+                <Button variant="contained" href="" onClick={() => {addToList("planToWatch")}}>
                     Add to Plan To Watch
                 </Button>
-                <Button variant="contained" href="" >
+                <Button variant="contained" href="" onClick={() => {addToList("watching")}}>
                     Add to Watching
                 </Button>
-                <Button variant="contained" href={""} >
+                <Button variant="contained" href={""} onClick={() => {addToList("watched")} }>
                     Add to Watched
                 </Button>
-                 <Button variant="contained" href={"#/review"} >
+                 <Button variant="contained" href={`#/review/${userID}/${showID}`} >
                     Write a Review
                 </Button>
             </Stack>
@@ -92,7 +238,7 @@ export function MovieInfo() {
               align="left"
               color="text.secondary"
             >
-              Some text describing a bad movie
+              {show ? show.Descript : ""}
             </Typography>
           </Container>
         </Box>
@@ -112,7 +258,9 @@ export function MovieInfo() {
               align="left"
               color="text.secondary"
             >
-              Actors Names
+              {actors ? actors.map((actor) => {
+                  return actor.FirstName + " " + actor.LastName + "," 
+              }) : ""}
             </Typography>
           </Container>
         </Box>
@@ -132,7 +280,9 @@ export function MovieInfo() {
               align="left"
               color="text.secondary"
             >
-              Actors Names
+              {directors ? directors.map((director) => {
+                  return director.FirstName + " " + director.LastName + "," 
+              }) : ""}
             </Typography>
           </Container>
         </Box>
@@ -151,27 +301,28 @@ export function MovieInfo() {
         <Container sx={{ py: 8 }} maxWidth="xl">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+            {reviews ? reviews.map((review) => (
+              <Grid item key={review} xs={12} sm={6} md={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                 >
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                      {"Title : " + review.Title}
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe the
-                      content.
+                      {"Comments : " + review.Comments} 
+                    </Typography>
+                    <Typography>
+                      {"Consensus : " + review.Consensus} 
+                    </Typography>
+                    <Typography>
+                      {"Overall Rating : " + review.Rating} 
                     </Typography>
                   </CardContent>
-                  <CardActions>
-                    <Button size="small">View</Button>
-                    <Button size="small">Edit</Button>
-                  </CardActions>
                 </Card>
               </Grid>
-            ))}
+            )) : <></>}
           </Grid>
         </Container>
       </main>

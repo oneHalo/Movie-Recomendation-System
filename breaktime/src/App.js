@@ -24,10 +24,10 @@ function App() {
         <Route path="/" element={   <SignIn />} />
         <Route path="/signUp" element = {<SignUp /> } />
         <Route path="/homePage" element = {<HomePage />} />
-        <Route path="/searchPage" element = {< SearchPage />} />
-        <Route path="/searchResults" element = {< SearchResults/>} />
-        <Route path="/movieInfo" element = {< MovieInfo/>} />
-        <Route path="/review" element = {< ReviewPage />} />
+        <Route path="/searchPage/:userID" element = {< SearchPage />} />
+        <Route path="/searchResults/:userID" element = {< SearchResults/>} />
+        <Route path="/movieInfo/:showID/:userID" element = {< MovieInfo/>} />
+        <Route path="/review/:showID/:userID" element = {< ReviewPage />} />
       </Routes>
     </HashRouter>
   );
