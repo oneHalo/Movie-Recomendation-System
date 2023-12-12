@@ -94,9 +94,9 @@ export function HomePage(props) {
     )
   }, []); 
 
-  if(userID === null){
-    return <Navigate to="/" />
-  }
+  // if(userID === null){
+  //   return <Navigate to="/" />
+  // }
 
 
   console.log(watched);

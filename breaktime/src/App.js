@@ -27,7 +27,7 @@ function App() {
         <Route path="/searchPage/:userID" element = {< SearchPage />} />
         <Route path="/searchResults/:userID" element = {< SearchResults/>} />
         <Route path="/movieInfo/:showID/:userID" element = {< MovieInfo/>} />
-        <Route path="/review/:showID/:userID" element = {< ReviewPage />} />
+        <Route path="/review/:userID/:showID" element = {< ReviewPage />} />
       </Routes>
     </HashRouter>
   );

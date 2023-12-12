@@ -23,12 +23,14 @@ const
     ReviewPage = () => {
 
         const navigate = useNavigate();
-        const { showID, userID } = useParams();
+        const { userID, showID } = useParams();
         const handleSubmit = (event) => {
 
             event.preventDefault();
             const data = new FormData(event.currentTarget);
             console.log({
+                ShowID: showID,
+                UserID : userID,
                 title: data.get("Title"),
                 rating: data.get("Number"),
                 comments: data.get("Comments")
