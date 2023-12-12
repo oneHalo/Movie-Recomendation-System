@@ -63,6 +63,7 @@ const
 
 const
     checkCredentials = (req, res) => {
+        
         if(
             req.body.email
             &&

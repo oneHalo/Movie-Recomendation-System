@@ -5,8 +5,9 @@ import { db } from "../../conector/db.js";
 const
     getShowsFromListByID = (req, res, userID) =>{
         const
-            q = `SELECT L.ShowID FROM ListHas as L
+            q = `SELECT * FROM ListHas as L, Shows as S
                 WHERE   L.UserID = ?
+                AND     L.ShowID = S.ShowID
                 AND     L.ListName = ?;` 
 
         db.query(
@@ -20,6 +21,9 @@ const
                     res.status(400).json({success: false});
                     console.log(err);
                 } else {
+                    console.log("successs")
+                    console.log(req.body.type);
+                    console.log(userID);
                     res.status(200).json(data);
                 }
             }

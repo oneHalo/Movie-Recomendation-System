@@ -17,6 +17,9 @@ import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { topBar } from '../../components/topBar/topBar';
+import { useLocation, Navigate } from 'react-router';
+
+import axios from "axios";
 
 // const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const cards = [1,2,3];
@@ -26,9 +29,97 @@ const defaultTheme = createTheme();
 
 export function HomePage(props) {
 
-//   const temp = localStorage.getItem("userID");
+  const location = useLocation();
 
-//   console.log(temp);
+  const [watched, setWatched] = React.useState(null);
+  const [watching, setWatching] = React.useState(null);
+  const [planToWatch, setPlanToWatch] = React.useState(null);
+
+  const userID = location.state ? location.state.userID : null;
+  console.log(userID);
+  //get watched
+
+  React.useEffect(() => {
+    axios.put(
+      `http://localhost:8000/showList/listHas/${userID}`, 
+      {
+        type : "watched"
+      }
+    )
+    .then(
+      (response) => {
+        setWatched(response.data);
+      },
+      (error) => {
+        console.log("ERROR GETTING WATCHED SHOWS");
+      }
+    )
+  }, []); 
+
+  React.useEffect(() => {
+    axios.put(
+      `http://localhost:8000/showList/listHas/${userID}`, 
+      {
+        type : "watching"
+      }
+    )
+    .then(
+      (response) => {
+        setWatching(response.data);
+      },
+      (error) => {
+        console.log("ERROR GETTING WATCHED SHOWS");
+      }
+    )
+  }, []);
+  React.useEffect(() => {
+    axios.put(
+      `http://localhost:8000/showList/listHas/${userID}`, 
+      {
+        type : "planToWatch"
+      }
+    )
+    .then(
+      (response) => {
+        setPlanToWatch(response.data);
+      },
+      (error) => {
+        console.log("ERROR GETTING WATCHED SHOWS");
+      }
+    )
+  }, []); 
+  // axios.get(
+  //   `http://localhost:8000/showList/listHas/${userID}`,
+  //   { type : "watching" }
+  // )
+  // .then(
+  //   (response) => {
+  //     watched = response.data
+  //   },
+  //   (error) => {
+  //     console.log("ERROR GETTING WATCHING SHOWS");
+  //   }
+  // )
+  // axios.get(
+  //   `http://localhost:8000/showList/listHas/${userID}`,
+  //   { type : "planToWatch" }
+  // )
+  // .then(
+  //   (response) => {
+  //     watched = response.data
+  //   },
+  //   (error) => {
+  //     console.log("ERROR GETTING WATCHED SHOWS");
+  //   }
+  // )
+  if(userID === null){
+    return <Navigate to="/" />
+  }
+
+
+  console.log(watched);
+  console.log(watching);
+  console.log(planToWatch);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -74,27 +165,26 @@ export function HomePage(props) {
         <Container sx={{ py: 8 }} maxWidth="xl">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+            { watched ? watched.map((show) => (
+              <Grid item key={show} xs={12} sm={6} md={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                 >
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                      {show.Title}
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe the
-                      content.
+                      {show.Descript}
                     </Typography>
                   </CardContent>
                   <CardActions>
                     <Button size="small">View</Button>
-                    <Button size="small">Edit</Button>
+                    <Button size="small">Add</Button>
                   </CardActions>
                 </Card>
               </Grid>
-            ))}
+            )) : <></>}
           </Grid>
         </Container>
         <Box>
@@ -112,27 +202,26 @@ export function HomePage(props) {
         <Container sx={{ py: 8 }} maxWidth="xl">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+          {watching ? watching.map((show) => (
+              <Grid item key={show} xs={12} sm={6} md={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                 >
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                      {show.Title}
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe the
-                      content.
+                      {show.Descript}
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">View</Button>
-                    <Button size="small">Edit</Button>
+                    <Button size="small" >View</Button>
+                    <Button size="small">Add</Button>
                   </CardActions>
                 </Card>
               </Grid>
-            ))}
+            )) : <></>}
           </Grid>
         </Container>
         <Box>
@@ -150,27 +239,26 @@ export function HomePage(props) {
         <Container sx={{ py: 8 }} maxWidth="xl">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+          {planToWatch ? planToWatch.map((show) => (
+              <Grid item key={show} xs={12} sm={6} md={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                 >
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                      {show.Title}
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe the
-                      content.
+                      {show.Descript}
                     </Typography>
                   </CardContent>
                   <CardActions>
                     <Button size="small">View</Button>
-                    <Button size="small">Edit</Button>
+                    <Button size="small">Add</Button>
                   </CardActions>
                 </Card>
               </Grid>
-            ))}
+            )) : <></>}
           </Grid>
         </Container>
       </main>
