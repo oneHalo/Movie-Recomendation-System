@@ -2,7 +2,8 @@ import express from "express";
 import { 
     getAllUsers,
     createNewUser,
-    checkCredentials
+    checkCredentials,
+    getLastID
 } from "../controllers/userController/userController.js";
 import{
     getUserByID, 
@@ -63,6 +64,7 @@ userRouter
         })
         .post((req, res) => {
             createNewUser(req, res);
+            console.log(getLastID());
         })
 
 

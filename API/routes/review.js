@@ -12,9 +12,9 @@ reviewRouter
     .route("/")
         .post((req, res) => {
             if(
-                req.body.userID === null
+                req.body.UserID === null
                 ||
-                req.body.showID === null
+                req.body.ShowID === null
             ){
                 res.status(400).json({succcess: false});
             }

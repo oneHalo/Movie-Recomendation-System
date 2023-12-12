@@ -93,33 +93,10 @@ export function HomePage(props) {
       }
     )
   }, []); 
-  // axios.get(
-  //   `http://localhost:8000/showList/listHas/${userID}`,
-  //   { type : "watching" }
-  // )
-  // .then(
-  //   (response) => {
-  //     watched = response.data
-  //   },
-  //   (error) => {
-  //     console.log("ERROR GETTING WATCHING SHOWS");
-  //   }
-  // )
-  // axios.get(
-  //   `http://localhost:8000/showList/listHas/${userID}`,
-  //   { type : "planToWatch" }
-  // )
-  // .then(
-  //   (response) => {
-  //     watched = response.data
-  //   },
-  //   (error) => {
-  //     console.log("ERROR GETTING WATCHED SHOWS");
-  //   }
-  // )
-  if(userID === null){
-    return <Navigate to="/" />
-  }
+
+  // if(userID === null){
+  //   return <Navigate to="/" />
+  // }
 
 
   console.log(watched);
@@ -131,7 +108,7 @@ export function HomePage(props) {
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
-          <Button variant="outined" href="#searchPage">Search For Movies!</Button>
+          <Button variant="outined" href={`/#/searchPage/${userID}`}>Search For Movies!</Button>
         </Toolbar>
       </AppBar>
       <main>
@@ -184,8 +161,7 @@ export function HomePage(props) {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">View</Button>
-                    <Button size="small">Add</Button>
+                    <Button size="small" href={`/#/movieInfo/${show.ShowID}/${userID}`}>View</Button>
                   </CardActions>
                 </Card>
               </Grid>
@@ -221,8 +197,7 @@ export function HomePage(props) {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" >View</Button>
-                    <Button size="small">Add</Button>
+                    <Button size="small" href={`/#/movieInfo/${show.ShowID}/${userID}`}>View</Button>
                   </CardActions>
                 </Card>
               </Grid>
@@ -258,8 +233,7 @@ export function HomePage(props) {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">View</Button>
-                    <Button size="small">Add</Button>
+                    <Button size="small"href={`/#/movieInfo/${show.ShowID}/${userID}`} >View</Button>
                   </CardActions>
                 </Card>
               </Grid>

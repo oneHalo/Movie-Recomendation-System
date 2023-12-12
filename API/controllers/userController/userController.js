@@ -2,6 +2,12 @@ import { db } from "../../conector/db.js"
 
 import jwt from "jsonwebtoken";
 
+let lastID = -1;
+
+const getLastID = () => {
+    return lastID;
+}
+
 //GET
 const 
     getAllUsers = (req, res) => {
@@ -36,7 +42,7 @@ const
             //If valid we insert
             const q = `
                 INSERT INTO UserClient (email, password, firstName, lastName) 
-                VALUES (?, ?, ?, ?);`
+                VALUES (?, ?, ?, ?); SELECT * FROM UserClient WHERE email = ? AND password = ? `
 
             db.query(
                 q, 
@@ -44,16 +50,40 @@ const
                     req.body.email,
                     req.body.password,
                     req.body.firstName,
-                    req.body.lastName
+                    req.body.lastName,
+                    req.body.email,
+                    req.body.password,
                 ],
                 (err, data) => {
                     if(err){
                         res.send(err);
                     }
+                    else {
+                        const userID = data[1][0].UserID;
+                        const q2 = `
+                            INSERT INTO ShowList(UserID, ListName, ListSize) VALUES(?, "planToWatch", 1);
+                            INSERT INTO ShowList(UserID, ListName, ListSize) VALUES(?, "watching", 1);
+                            INSERT INTO ShowList(UserID, ListName, ListSize) VALUES(?, "watched", 1);
+                        `
+
+                        db.query(
+                            q2,
+                            [
+                                userID,
+                                userID,
+                                userID
+                            ],
+                            (err, data) =>{
+                                if(err){
+                                    console.log(err);
+                                    res.send(err);
+                                }
+                            }
+                        );
+                    }
 
                 }
             );
-
         }
         else {
             res.status(400).send("invalid arguments for createNewUser");
@@ -99,5 +129,6 @@ const
 export {
     getAllUsers,
     createNewUser,
-    checkCredentials
+    checkCredentials,
+    getLastID
 };

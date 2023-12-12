@@ -13,7 +13,8 @@ import TextField from '@mui/material/TextField';
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { useNavigate } from 'react-router';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router';
 
 const defaultTheme = createTheme();
 
@@ -22,14 +23,40 @@ const
     ReviewPage = () => {
 
         const navigate = useNavigate();
+        const { userID, showID } = useParams();
         const handleSubmit = (event) => {
 
             event.preventDefault();
             const data = new FormData(event.currentTarget);
             console.log({
-            email: data.get('email'),
+                ShowID: showID,
+                UserID : userID,
+                title: data.get("Title"),
+                rating: data.get("Number"),
+                comments: data.get("Comments")
             });
-            navigate("/searchResults", {state: {movieQueryText : data.get("email")}});
+            //submit review
+        axios.post(
+            "http://localhost:8000/review", {
+                UserID : userID,
+                ShowID :showID,
+                Title : data.get("Title"),
+                Rating : data.get("Rating"),
+                Comments : data.get("Comments"),
+            
+            }
+            ).then(
+            (response) => {
+                //if credentials are good move to next page
+                // console.log(response.data);
+                console.log(response.data);
+                // navigate("/homePage", {state: { userID: response.data.UserID }});
+            },
+            (error) => {
+                console.log(error);
+            }
+    )
+            
         };
 
         return(
@@ -61,16 +88,24 @@ const
                                 autoFocus
                             />
                             <TextField
-                                id="number"
+                                id="Number"
                                 label="Rating"
                                 type="number"
+                                name="Number"
                                 fullWidth
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
                             />
-                            <TextareaAutosize id="comments" minRows={3} placeholder="Write your review here" />
-
+                            <TextareaAutosize id="Comments" name="Comments" minRows={3} placeholder="Write your review here" />
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                                >
+                                Submit
+                            </Button>
                         </Box>
                         <Stack 
                             direction={{ xs: 'column', sm: 'row' }}

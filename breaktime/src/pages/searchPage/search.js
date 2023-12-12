@@ -13,12 +13,17 @@ import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useNavigate } from 'react-router';
+import { useParams } from 'react-router';
 
 const defaultTheme = createTheme();
 
 
 const
     SearchPage = () => {
+
+        const { userID } = useParams();
+
+        console.log(userID);
 
         const navigate = useNavigate();
         const handleSubmit = (event) => {
@@ -28,8 +33,10 @@ const
             console.log({
             search: data.get('search'),
             });
-            navigate("/searchResults", {state: {movieQueryText : data.get("search")}});
+            navigate(`/searchResults/${userID}`, {state: {movieQueryText : data.get("search")}});
         };
+
+
 
         return(
         <ThemeProvider theme={defaultTheme}>
