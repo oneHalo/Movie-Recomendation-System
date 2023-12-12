@@ -9,14 +9,6 @@ import{
 const showRouter = express.Router();
 
 
-//update averageRating for a show
-showRouter
-    .route("/averageRating/:showID")
-        .put((req, res) => {
-            res.send(
-                `update average rating for show with id ${req.params.showID}`
-            );
-        });
 
 //crud for a specific show by id
 showRouter

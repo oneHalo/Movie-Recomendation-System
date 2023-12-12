@@ -1,3 +1,8 @@
+/*
+James Platt search js
+This page makes heavy use of Material ui components
+https://mui.com/
+*/
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import { Button, Container } from '@mui/material';
@@ -39,13 +44,10 @@ const
                     >
                     <Grid item xs={3}>
                         <Typography variant='h3' sx={{textAlign: "center"}}>
-                        Contact Me!
+                        Find a movie!
                         </Typography>
                         <Typography paragraph={true} sx={{fontSize: '1.3em'}}>
-                            The best way to get in contact with me is through
-                            my email or my linkedIn account, which both can be
-                            found below. If you would like to take a look at my
-                            resume, please feel free to aswell!
+                            Enter the name of the movie below
                         </Typography>
                         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                                     <TextField

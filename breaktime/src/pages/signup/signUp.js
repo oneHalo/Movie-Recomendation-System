@@ -1,3 +1,8 @@
+/*
+James Platt signUp.js
+This page uses material ui components, and makes heavy use of the sign up template found here
+https://github.com/mui/material-ui/tree/v5.14.20/docs/data/material/getting-started/templates/sign-up
+*/
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
