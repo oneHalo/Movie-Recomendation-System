@@ -1,5 +1,4 @@
---tables done: user, admin, show, actor, prodcompany, tv show, movie, director, acts in 
--- tables to go:
+-- this is a list of possible queries our application will use
 
 -- USER RELATED QUERIES
 -- -------------------------

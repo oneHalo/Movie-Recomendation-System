@@ -1,3 +1,6 @@
+-- this is a list of tables that our application uses
+-- you should be able to run them all in order to create your db
+
 -- client user table declaration
 CREATE TABLE UserClient(
     UserID      int NOT NULL AUTO_INCREMENT,
